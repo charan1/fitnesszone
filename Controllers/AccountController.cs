@@ -17,9 +17,99 @@ namespace Testloginapp1.Controllers
     [InitializeSimpleMembership]
     public class AccountController : Controller
     {
-        //
+
+        private IUserRepository _repository;
+        public AccountController()
+            : this(new UserRepository())
+        {
+        }
+        public AccountController(IUserRepository repository)
+        {
+            _repository = repository;
+        }  //
         // GET: /Account/Login
 
+        public ActionResult Index()
+        {
+            var users = _repository.GetUsers();
+            return View(users);
+        }
+
+        public ActionResult Details(int id)
+        {
+            UserModel model = _repository.GetUserById(id);
+            return View(model);
+        }
+        public ActionResult Delete(int id, bool? saveChangesError)
+        {
+            if (saveChangesError.GetValueOrDefault())
+            {
+                ViewBag.ErrorMessage = "Unable to save changes. Try again, and if the problem persists see your system administrator.";
+            }
+            UserModel user = _repository.GetUserById(id);
+            return View(user);
+        }
+        [HttpPost, ActionName("Delete")]
+        public ActionResult DeleteConfirmed(int id)
+        {
+            try
+            {
+                UserModel user = _repository.GetUserById(id);
+                _repository.DeleteUser(id);
+            }
+            catch (Exception e)
+            {
+                return RedirectToAction("Delete",
+                new System.Web.Routing.RouteValueDictionary { 
+          { "id", id }, 
+          { "saveChangesError", true } });
+            }
+            return RedirectToAction("Index");
+        }
+        public ActionResult Edit(int id)
+        {
+            UserModel model = _repository.GetUserById(id);
+            return View(model);
+        }
+        [HttpPost]
+        public ActionResult Edit(UserModel user)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    _repository.UpdateUser(user);
+                    return RedirectToAction("Index");
+                }
+            }
+            catch (Exception e)
+            {
+                ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists see your system administrator.");
+            }
+            return View(user);
+        }
+
+        public ActionResult Create()
+        {
+            return View(new UserModel());
+        }
+        [HttpPost]
+        public ActionResult Create(UserModel user)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    _repository.InsertUser(user);
+                    return RedirectToAction("Index");
+                }
+            }
+            catch (Exception e)
+            {
+                ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists see your system administrator.");
+            }
+            return View(user);
+        }
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
         {
@@ -79,7 +169,7 @@ namespace Testloginapp1.Controllers
                 // Attempt to register the user
                 try
                 {
-                    WebSecurity.CreateUserAndAccount(model.UserName, model.Password, new {model.EmailId },false);
+                    WebSecurity.CreateUserAndAccount(model.UserName, model.Password, new {model.EmailId });
                     WebSecurity.Login(model.UserName, model.Password);
                     return RedirectToAction("Index", "Home");
                 }

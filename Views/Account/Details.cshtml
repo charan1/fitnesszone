@@ -1,0 +1,30 @@
+﻿@model Testloginapp1.Models.UserModel
+
+<fieldset>
+    <legend>UserModel</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.uname)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.uname)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.chkbx)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.chkbx)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.status)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.status)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

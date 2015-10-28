@@ -83,7 +83,7 @@
 			   <li class="@(ViewContext.RouteData.Values["Action"].ToString() == "Blog" ? "active" : "")">@Html.ActionLink("Blog", "Blog", "Home")</li>
 			   <li class="@(ViewContext.RouteData.Values["Action"].ToString() == "Pricing" ? "active" : "")">@Html.ActionLink("Pricing", "Pricing", "Home")</li>
 			   <li class="@(ViewContext.RouteData.Values["Action"].ToString() == "Contact" ? "active" : "")">@Html.ActionLink("Contact", "Contact", "Home")</li>
-		    
+		         <li class="@(ViewContext.RouteData.Values["Action"].ToString() == "Index" ? "active" : "")">@Html.ActionLink("Index", "Index", "Account")</li>
                  @*@if (Roles.IsUserInRole("Admin")){ 
                  *@@*<li>@Html.ActionLink("Roles", "Rolecreate", "Account")</li>*@
                  

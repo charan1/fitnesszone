@@ -1,20 +1,52 @@
 ﻿@model Testloginapp1.Models.LoginModel
 
-@{
+@*@{
     ViewBag.Title = "Log in";
-}
+}*@
 
-<hgroup class="title">
+@*<hgroup class="title">
     <h1>@ViewBag.Title.</h1>
 </hgroup>
 
-<section id="loginForm">
-<h2>Use a local account to log in.</h2>
+<section id="loginForm">*@
+
+
+
+@*   <fieldset>
+        <legend>Log in Form</legend>
+        <ol>
+            <li>
+                @Html.LabelFor(m => m.UserName)&nbsp;&nbsp;&nbsp;&nbsp;
+                @Html.TextBoxFor(m => m.UserName)
+                @Html.ValidationMessageFor(m => m.UserName)
+            </li>
+            <li>
+                @Html.LabelFor(m => m.Password)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                @Html.PasswordFor(m => m.Password)
+                @Html.ValidationMessageFor(m => m.Password)
+            </li>
+            <li>
+                @Html.LabelFor(m => m.RememberMe, new { @class = "checkbox" })
+                 @Html.CheckBoxFor(m => m.RememberMe)
+              
+            </li>
+        </ol>
+        <input type="submit" value="Log in" />
+    </fieldset>
+    <p>j
+        @Html.ActionLink("Register", "Register") if you don't have an account.
+    </p>
+}
+</section>
+
+<section class="social" id="socialLoginForm">
+    <h2>Use another service to log in.</h2>
+    @Html.Action("ExternalLoginsList", new { ReturnUrl = ViewBag.ReturnUrl })
+</section>*@
 @using (Html.BeginForm(new { ReturnUrl = ViewBag.ReturnUrl })) {
     @Html.AntiForgeryToken()
-    @Html.ValidationSummary(true)
-
-     <div class="main">
+    @Html.ValidationSummary(true) 
+    <div class="main">
           <div class="login_top">
           	<div class="container">
 			  <div class="row">
@@ -51,45 +83,30 @@
 							   </p>
 							   <p>
                                 @Html.ActionLink("Reset", "ForgotPassword","Account")
-             
+
 </p>
-                         
-     <input type="submit" class="button j " value="Log in" />
-			
+                                <input type="submit" class="button j " value="Log in" />
+							    <section class="social" id="socialLoginForm">
+    <h2>Use another service to log in.</h2>
+    @Html.Action("ExternalLoginsList", new { ReturnUrl = ViewBag.ReturnUrl })
+</section> 
                             </div>
-						   
-                          
-                          </fieldset>
-						
-                             </form>
-					<div class="p1">  @Html.Action("ExternalLoginsList", new { ReturnUrl = ViewBag.ReturnUrl })   </div>
-                    </div>
+						  </fieldset>
+						 </form>
+					</div>
 			      </div>
 				</div>
-			
+				<div class="clear"></div>
+			  </div>
 			</div>
- 
+
           	</div>
 		  </div>
-        
-
-          </div>
-
-          </div>
-		 
-
+         </div>
+   
+		  
 }
-}
-
-@*                           <section class="social" id="socialLoginForm">
- 
-    @Html.Action("ExternalLoginsList", new { ReturnUrl = ViewBag.ReturnUrl })
-</section>*@
-    
-                      
-
-
-
+   @Scripts.Render("~/bundles/jquery")
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }

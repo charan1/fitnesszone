@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity;
 using System.Globalization;
 using System.Web.Security;
-
+using System.Linq;
 namespace Testloginapp1.Models
 {
     public class UsersContext : DbContext
@@ -73,7 +73,91 @@ namespace Testloginapp1.Models
         [Compare("NewPassword", ErrorMessage = "The new password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
     }
+    public class UserModel
+    {
 
+        public int Id { get; set; }
+        [Display(Name = "UserName")]
+        public string uname { get; set; }
+        [Display(Name = "CheckBox")]
+        public bool chkbx { get; set; }
+        public bool status { get; set; }
+        public List<Table> UserTables { get; set; }
+    }
+    public interface IUserRepository
+    {
+        IEnumerable<UserModel> GetUsers();
+        UserModel GetUserById(int Id);
+        void InsertUser(UserModel user);
+        void DeleteUser(int userId);
+        void UpdateUser(UserModel user);
+    }
+    public class UserRepository : IUserRepository
+    {
+        private DataClasses1DataContext _dataContext;
+        public UserRepository()
+        {
+            _dataContext = new DataClasses1DataContext();
+        }
+
+        public void InsertUser(UserModel user)
+        {
+            var userData = new Table()
+            {
+                Name = user.uname,
+                chkbx = (user.chkbx).ToString()
+            };
+            _dataContext.Tables.InsertOnSubmit(userData);
+            _dataContext.SubmitChanges();
+        }
+        public IEnumerable<UserModel> GetUsers()
+        {
+            IList<UserModel> userList = new List<UserModel>();
+            var query = from user in _dataContext.Tables
+                        select user;
+            var users = query.ToList();
+            foreach (var userData in users)
+            {
+                userList.Add(new UserModel()
+                {
+                    Id = userData.Id,
+                    uname = userData.Name,
+                    chkbx = Convert.ToBoolean(userData.chkbx),
+                    status = Convert.ToBoolean(userData.Status)
+                });
+            }
+            return userList;
+        }
+        public UserModel GetUserById(int Id)
+        {
+            var query = from u in _dataContext.Tables
+                        where u.Id == Id
+                        select u;
+            var user = query.FirstOrDefault();
+            var model = new UserModel()
+            {
+
+                uname = user.Name,
+                chkbx = Convert.ToBoolean(user.chkbx),
+                status = Convert.ToBoolean(user.Status)
+            };
+            return model;
+        }
+        public void DeleteUser(int userId)
+        {
+            Table user = _dataContext.Tables.Where(u => u.Id == userId).SingleOrDefault();
+            _dataContext.Tables.DeleteOnSubmit(user);
+            _dataContext.SubmitChanges();
+        }
+        public void UpdateUser(UserModel user)
+        {
+            Table userData = _dataContext.Tables.Where(u => u.Id == user.Id).SingleOrDefault();
+            userData.Name = user.uname;
+            userData.chkbx = (user.chkbx).ToString();
+            userData.Status = (user.status).ToString();
+            _dataContext.SubmitChanges();
+        }
+    }
     public class LoginModel
     {
         [Required]
@@ -109,7 +193,7 @@ namespace Testloginapp1.Models
         public string ConfirmPassword { get; set; }
 
         [Required]
-        [Display(Name = "")]
+        [Display(Name = "email")]
         public string EmailId { get; set; }
 
        

@@ -1,0 +1,47 @@
+﻿@model Testloginapp1.Models.UserModel
+
+<script src="~/Scripts/jquery-1.7.1.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>UserModel</legend>
+
+        @Html.HiddenFor(model => model.Id)
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.uname)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.uname)
+            @Html.ValidationMessageFor(model => model.uname)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.chkbx)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.chkbx)
+            @Html.ValidationMessageFor(model => model.chkbx)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.status)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.status)
+            @Html.ValidationMessageFor(model => model.status)
+        </div>
+
+        <p>
+            <input type="submit" value="Save" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

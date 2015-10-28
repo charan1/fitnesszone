@@ -23,8 +23,8 @@ namespace Testloginapp1
             //    consumerSecret: "");
 
             //OAuthWebSecurity.RegisterFacebookClient(
-            //    appId: "",
-            //    appSecret: "");
+            //   appId: "844527142311752",
+            //     appSecret: "e83f0a051bbb023c371082492accd2b2");
 
             //OAuthWebSecurity.RegisterGoogleClient();
         }
