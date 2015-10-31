@@ -15,6 +15,7 @@ namespace Testloginapp1.Models
         {
         }
 
+
         public DbSet<UserProfile> UserProfiles { get; set; }
         public DbSet<webpages_Membership> webpages_Memberships { get; set; }
     }
