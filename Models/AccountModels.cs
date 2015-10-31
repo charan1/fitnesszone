@@ -77,11 +77,14 @@ namespace Testloginapp1.Models
     {
 
         public int Id { get; set; }
-        [Display(Name = "UserName")]
-        public string uname { get; set; }
+        [Display(Name = "Topic")]
+        public string topic { get; set; }
+        [Display(Name = "Description")]
+        public string Description { get; set; }
         [Display(Name = "CheckBox")]
         public bool chkbx { get; set; }
         public bool status { get; set; }
+        public string usname { get; set; }
         public List<Table> UserTables { get; set; }
     }
     public interface IUserRepository
@@ -104,8 +107,9 @@ namespace Testloginapp1.Models
         {
             var userData = new Table()
             {
-                Name = user.uname,
-                chkbx = (user.chkbx).ToString()
+                Topic = user.topic,
+                Description=user.Description,
+                checkbox = (user.chkbx).ToString()
             };
             _dataContext.Tables.InsertOnSubmit(userData);
             _dataContext.SubmitChanges();
@@ -121,9 +125,11 @@ namespace Testloginapp1.Models
                 userList.Add(new UserModel()
                 {
                     Id = userData.Id,
-                    uname = userData.Name,
-                    chkbx = Convert.ToBoolean(userData.chkbx),
-                    status = Convert.ToBoolean(userData.Status)
+                    topic = userData.Topic,
+                    Description=userData.Description,
+                    chkbx = Convert.ToBoolean(userData.checkbox),
+                    status = Convert.ToBoolean(userData.status),
+                    usname=userData.uname
                 });
             }
             return userList;
@@ -137,9 +143,10 @@ namespace Testloginapp1.Models
             var model = new UserModel()
             {
 
-                uname = user.Name,
-                chkbx = Convert.ToBoolean(user.chkbx),
-                status = Convert.ToBoolean(user.Status)
+                topic = user.Topic,
+                Description=user.Description,
+                chkbx = Convert.ToBoolean(user.checkbox),
+                status = Convert.ToBoolean(user.status)
             };
             return model;
         }
@@ -152,9 +159,11 @@ namespace Testloginapp1.Models
         public void UpdateUser(UserModel user)
         {
             Table userData = _dataContext.Tables.Where(u => u.Id == user.Id).SingleOrDefault();
-            userData.Name = user.uname;
-            userData.chkbx = (user.chkbx).ToString();
-            userData.Status = (user.status).ToString();
+            userData.Topic = user.topic;
+            userData.Description = user.Description;
+            userData.checkbox = (user.chkbx).ToString();
+            userData.status = (user.status).ToString();
+            userData.uname = user.usname;
             _dataContext.SubmitChanges();
         }
     }

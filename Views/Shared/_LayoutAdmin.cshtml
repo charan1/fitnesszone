@@ -49,7 +49,7 @@
 				<i class="phone"> </i><span>1-200-346-2986</span>
 			</div>
 			<div class="social">	
-			     @Html.Partial("_LoginPartial")
+			     @Html.Partial("_LoginPartial") @Html.Partial("_LoginPartial1") 
                 <ul>	
 				  <li class="facebook"><a href="#"><span> </span></a></li>
 				  <li class="twitter"><a href="#"><span> </span></a></li>
@@ -73,15 +73,16 @@
 		 <div class="h_menu4"><!-- start h_menu4 -->
 		   <a class="toggleMenu" href="#">Menu</a>
 			 <ul class="nav">
-			   <li class="active">@Html.ActionLink("Home", "Index", "Home")</li>
-			   <li>@Html.ActionLink("About", "About", "Home")</li>
-			   <li>@Html.ActionLink("Trainer", "Trainer", "Home")</li>
-			   <li>@Html.ActionLink("Classes", "Classes", "Home")</li>
-			
-                  <li>@Html.ActionLink("Blog", "Blog", "Home")</li>
-			   <li>@Html.ActionLink("Pricing", "Pricing", "Home")</li>
-			   <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-			    <li>@Html.ActionLink("Roles", "Rolecreate", "Account")</li>
+		   <li class="@(ViewContext.RouteData.Values["Action"].ToString() == "Index" ? "active" : "")">@Html.ActionLink("Home", "Index", "Home")</li>
+			   <li class="@(ViewContext.RouteData.Values["Action"].ToString() == "About" ? "active" : "")">@Html.ActionLink("About", "About", "Home")</li>
+			   <li class="@(ViewContext.RouteData.Values["Action"].ToString() == "Trainer" ? "active" : "")">@Html.ActionLink("Trainer", "Trainer", "Home")</li>
+			   <li class="@(ViewContext.RouteData.Values["Action"].ToString() == "Classes" ? "active" : "")">@Html.ActionLink("Classes", "Classes", "Home")</li>
+			   <li class="@(ViewContext.RouteData.Values["Action"].ToString() == "Blog" ? "active" : "")">@Html.ActionLink("Blog", "Blog", "Home")</li>
+			   <li class="@(ViewContext.RouteData.Values["Action"].ToString() == "Pricing" ? "active" : "")">@Html.ActionLink("Pricing", "Pricing", "Home")</li>
+			   <li class="@(ViewContext.RouteData.Values["Action"].ToString() == "Contact" ? "active" : "")">@Html.ActionLink("Contact", "Contact", "Home")</li>
+		       <li class="@(ViewContext.RouteData.Values["Action"].ToString() == "RoleIndex" ? "active" : "")">@Html.ActionLink("Roles", "RoleIndex", "Account")</li>
+               <li class="@(ViewContext.RouteData.Values["Action"].ToString() == "Index1" ? "active" : "")">@Html.ActionLink("Index", "Index1", "Account")</li>
+               <li class="@(ViewContext.RouteData.Values["Action"].ToString() == "Index2" ? "active" : "")">@Html.ActionLink("Index1", "Index2", "Account")</li>
                
              </ul>
 			@*  <script type="text/javascript" src="js/nav.js"></script>*@

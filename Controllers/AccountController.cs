@@ -29,12 +29,20 @@ namespace Testloginapp1.Controllers
         }  //
         // GET: /Account/Login
 
-        public ActionResult Index()
+        [InitializeSimpleMembership]
+        public ActionResult Index1()
         {
             var users = _repository.GetUsers();
+            ViewBag.uname = User.Identity.Name;
             return View(users);
         }
-
+        [InitializeSimpleMembership]
+        public ActionResult Index2()
+        {
+            var users = _repository.GetUsers();
+            ViewBag.uname = User.Identity.Name;
+            return View(users);
+        }
         public ActionResult Details(int id)
         {
             UserModel model = _repository.GetUserById(id);
@@ -64,11 +72,13 @@ namespace Testloginapp1.Controllers
           { "id", id }, 
           { "saveChangesError", true } });
             }
-            return RedirectToAction("Index");
+            return RedirectToAction("Index2");
         }
+        [InitializeSimpleMembership] 
         public ActionResult Edit(int id)
         {
             UserModel model = _repository.GetUserById(id);
+            ViewBag.uname = User.Identity.Name;
             return View(model);
         }
         [HttpPost]
@@ -101,7 +111,7 @@ namespace Testloginapp1.Controllers
                 if (ModelState.IsValid)
                 {
                     _repository.InsertUser(user);
-                    return RedirectToAction("Index");
+                    return RedirectToAction("Index2");
                 }
             }
             catch (Exception e)

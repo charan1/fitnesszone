@@ -35,8 +35,8 @@ namespace Testloginapp1.Models
     partial void DeleteTable(Table instance);
     #endregion
 		
-		public DataClasses1DataContext() : 
-				base(global::System.Configuration.ConfigurationManager.ConnectionStrings["jkConnectionString"].ConnectionString, mappingSource)
+		public DataClasses1DataContext() :
+        base(global::System.Configuration.ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString, mappingSource)
 		{
 			OnCreated();
 		}
@@ -82,11 +82,15 @@ namespace Testloginapp1.Models
 		
 		private int _Id;
 		
-		private string _Name;
+		private string _Topic;
 		
-		private string _chkbx;
+		private string _Description;
 		
-		private string _Status;
+		private string _checkbox;
+		
+		private string _status;
+		
+		private string _uname;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -94,12 +98,16 @@ namespace Testloginapp1.Models
     partial void OnCreated();
     partial void OnIdChanging(int value);
     partial void OnIdChanged();
-    partial void OnNameChanging(string value);
-    partial void OnNameChanged();
-    partial void OnchkbxChanging(string value);
-    partial void OnchkbxChanged();
-    partial void OnStatusChanging(string value);
-    partial void OnStatusChanged();
+    partial void OnTopicChanging(string value);
+    partial void OnTopicChanged();
+    partial void OnDescriptionChanging(string value);
+    partial void OnDescriptionChanged();
+    partial void OncheckboxChanging(string value);
+    partial void OncheckboxChanged();
+    partial void OnstatusChanging(string value);
+    partial void OnstatusChanged();
+    partial void OnunameChanging(string value);
+    partial void OnunameChanged();
     #endregion
 		
 		public Table()
@@ -107,7 +115,7 @@ namespace Testloginapp1.Models
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", DbType="Int NOT NULL", IsPrimaryKey=true, IsDbGenerated=true)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
 		public int Id
 		{
 			get
@@ -127,62 +135,102 @@ namespace Testloginapp1.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Name", DbType="NVarChar(MAX)")]
-		public string Name
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Topic", DbType="NVarChar(MAX)")]
+		public string Topic
 		{
 			get
 			{
-				return this._Name;
+				return this._Topic;
 			}
 			set
 			{
-				if ((this._Name != value))
+				if ((this._Topic != value))
 				{
-					this.OnNameChanging(value);
+					this.OnTopicChanging(value);
 					this.SendPropertyChanging();
-					this._Name = value;
-					this.SendPropertyChanged("Name");
-					this.OnNameChanged();
+					this._Topic = value;
+					this.SendPropertyChanged("Topic");
+					this.OnTopicChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_chkbx", DbType="NVarChar(MAX)")]
-		public string chkbx
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Description", DbType="NVarChar(MAX)")]
+		public string Description
 		{
 			get
 			{
-				return this._chkbx;
+				return this._Description;
 			}
 			set
 			{
-				if ((this._chkbx != value))
+				if ((this._Description != value))
 				{
-					this.OnchkbxChanging(value);
+					this.OnDescriptionChanging(value);
 					this.SendPropertyChanging();
-					this._chkbx = value;
-					this.SendPropertyChanged("chkbx");
-					this.OnchkbxChanged();
+					this._Description = value;
+					this.SendPropertyChanged("Description");
+					this.OnDescriptionChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Status", DbType="NVarChar(MAX)")]
-		public string Status
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_checkbox", DbType="NVarChar(MAX)")]
+		public string checkbox
 		{
 			get
 			{
-				return this._Status;
+				return this._checkbox;
 			}
 			set
 			{
-				if ((this._Status != value))
+				if ((this._checkbox != value))
 				{
-					this.OnStatusChanging(value);
+					this.OncheckboxChanging(value);
 					this.SendPropertyChanging();
-					this._Status = value;
-					this.SendPropertyChanged("Status");
-					this.OnStatusChanged();
+					this._checkbox = value;
+					this.SendPropertyChanged("checkbox");
+					this.OncheckboxChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_status", DbType="NVarChar(MAX)")]
+		public string status
+		{
+			get
+			{
+				return this._status;
+			}
+			set
+			{
+				if ((this._status != value))
+				{
+					this.OnstatusChanging(value);
+					this.SendPropertyChanging();
+					this._status = value;
+					this.SendPropertyChanged("status");
+					this.OnstatusChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_uname", DbType="NVarChar(MAX)")]
+		public string uname
+		{
+			get
+			{
+				return this._uname;
+			}
+			set
+			{
+				if ((this._uname != value))
+				{
+					this.OnunameChanging(value);
+					this.SendPropertyChanging();
+					this._uname = value;
+					this.SendPropertyChanged("uname");
+					this.OnunameChanged();
 				}
 			}
 		}

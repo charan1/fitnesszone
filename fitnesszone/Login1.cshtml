@@ -1,0 +1,112 @@
+﻿@model Testloginapp1.Models.LoginModel
+
+@*@{
+    ViewBag.Title = "Log in";
+}*@
+
+@*<hgroup class="title">
+    <h1>@ViewBag.Title.</h1>
+</hgroup>
+
+<section id="loginForm">*@
+
+
+
+@*   <fieldset>
+        <legend>Log in Form</legend>
+        <ol>
+            <li>
+                @Html.LabelFor(m => m.UserName)&nbsp;&nbsp;&nbsp;&nbsp;
+                @Html.TextBoxFor(m => m.UserName)
+                @Html.ValidationMessageFor(m => m.UserName)
+            </li>
+            <li>
+                @Html.LabelFor(m => m.Password)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                @Html.PasswordFor(m => m.Password)
+                @Html.ValidationMessageFor(m => m.Password)
+            </li>
+            <li>
+                @Html.LabelFor(m => m.RememberMe, new { @class = "checkbox" })
+                 @Html.CheckBoxFor(m => m.RememberMe)
+              
+            </li>
+        </ol>
+        <input type="submit" value="Log in" />
+    </fieldset>
+    <p>j
+        @Html.ActionLink("Register", "Register") if you don't have an account.
+    </p>
+}
+</section>
+
+<section class="social" id="socialLoginForm">
+    <h2>Use another service to log in.</h2>
+    @Html.Action("ExternalLoginsList", new { ReturnUrl = ViewBag.ReturnUrl })
+</section>*@
+@using (Html.BeginForm(new { ReturnUrl = ViewBag.ReturnUrl })) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true) 
+    <div class="main">
+          <div class="login_top">
+          	<div class="container">
+			  <div class="row">
+                  <div class="col-md-6">
+				 <div class="login-page">
+					<h4 class="title">New Customers</h4>
+					<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis</p>
+					<div class="button1">
+					   <a href="register.html"><input type="submit" name="Submit" value="Create an Account"></a>
+					 </div>
+					 <div class="clear"></div>
+				  </div>
+				</div>
+				<div class="col-md-6">
+				 <div class="login-page">
+				  <div class="login-title">
+	           		<h4 class="title">Registered Customers</h4>
+					<div id="loginbox" class="loginbox">
+						<form action="" method="post" name="login" id="login-form">
+						  <fieldset class="input">
+						    <p id="login-form-username">
+						      <label for="modlgn_username">Username</label>
+						     @Html.TextBoxFor(m => m.UserName)
+                @Html.ValidationMessageFor(m => m.UserName)
+						    </p>
+						    <p id="login-form-password">
+						      <label for="modlgn_passwd">Password</label>
+						       @Html.PasswordFor(m => m.Password)
+                              @Html.ValidationMessageFor(m => m.Password)
+						    </p>
+						    <div class="remember">
+							    <p id="login-form-remember">
+							      <label for="modlgn_remember"><a href="#">Forget Your Password ? </a></label>
+							   </p>
+							   <p>
+                                @Html.ActionLink("Reset", "ForgotPassword","Account")
+
+</p>
+                                <input type="submit" class="button j " value="Log in" />
+							    <section class="social" id="socialLoginForm">
+    <h2>Use another service to log in.</h2>
+    @Html.Action("ExternalLoginsList", new { ReturnUrl = ViewBag.ReturnUrl })
+</section> 
+                            </div>
+						  </fieldset>
+						 </form>
+					</div>
+			      </div>
+				</div>
+				<div class="clear"></div>
+			  </div>
+			</div>
+
+          	</div>
+		  </div>
+         </div>
+   
+		  
+}
+   @Scripts.Render("~/bundles/jquery")
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

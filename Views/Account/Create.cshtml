@@ -11,11 +11,19 @@
         <legend>UserModel</legend>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.uname)
+            @Html.LabelFor(model => model.topic)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.uname)
-            @Html.ValidationMessageFor(model => model.uname)
+            @Html.EditorFor(model => model.topic)
+            @Html.ValidationMessageFor(model => model.topic)
+        </div>
+
+             <div class="editor-label">
+            @Html.LabelFor(model => model.Description)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Description)
+            @Html.ValidationMessageFor(model => model.Description)
         </div>
 
         <div class="editor-label">
@@ -41,5 +49,5 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Back to List", "Index2")
 </div>

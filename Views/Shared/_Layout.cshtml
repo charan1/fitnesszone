@@ -49,7 +49,7 @@
 		
             </div>
 			<div class="social">	
-			     @Html.Partial("_LoginPartial")
+			     @Html.Partial("_LoginPartial")  @Html.Partial("_LoginPartial1") 
                  <ul>	
 				  <li class="facebook"><a href="#"><span> </span></a></li>
 				  <li class="twitter"><a href="#"><span> </span></a></li>
@@ -83,8 +83,8 @@
 			   <li class="@(ViewContext.RouteData.Values["Action"].ToString() == "Blog" ? "active" : "")">@Html.ActionLink("Blog", "Blog", "Home")</li>
 			   <li class="@(ViewContext.RouteData.Values["Action"].ToString() == "Pricing" ? "active" : "")">@Html.ActionLink("Pricing", "Pricing", "Home")</li>
 			   <li class="@(ViewContext.RouteData.Values["Action"].ToString() == "Contact" ? "active" : "")">@Html.ActionLink("Contact", "Contact", "Home")</li>
-		         <li class="@(ViewContext.RouteData.Values["Action"].ToString() == "Index" ? "active" : "")">@Html.ActionLink("Index", "Index", "Account")</li>
-                 @*@if (Roles.IsUserInRole("Admin")){ 
+
+                      @*@if (Roles.IsUserInRole("Admin")){ 
                  *@@*<li>@Html.ActionLink("Roles", "Rolecreate", "Account")</li>*@
                  
                      </ul>

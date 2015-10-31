@@ -1,0 +1,93 @@
+﻿@model IEnumerable<Testloginapp1.Models.UserModel>
+@{
+    //ViewBag.Title = "RoleCreate";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<style>
+    .table {
+        width: 100%;
+        border: 1px solid gray;
+    }
+
+    .table td {
+        padding: 2px;
+    }
+
+
+    .table-row-1 td, .table-row-1 th {
+        background: lightgray;
+        border: 0 solid lightgray;
+    }
+
+    .table-row-2 td, .table-row-2 th, thead {
+        background: white;
+        border: 0 solid white;
+    }
+
+    .tableHeaderRow {
+        font-weight: bold;
+        border: 1px solid lightgray;
+    }
+
+    .column1 {
+        width: 15%;
+    }
+
+    .column2 {
+        width: 15%;
+    }
+
+
+</style>
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p><p>  @ViewBag.uname</p>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.topic)
+        </th>
+      
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+
+          <th>
+            @Html.DisplayNameFor(model => model.chkbx)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.status)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+
+    
+      <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.topic)
+        </td>
+       
+         <td>
+            @Html.DisplayFor(modelItem => item.Description)
+        </td>
+
+         <td>
+            @Html.DisplayFor(modelItem => item.chkbx)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.status)
+        </td>
+       <td></td>
+         <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+        </td>
+    </tr>
+
+
+}</table>
+
